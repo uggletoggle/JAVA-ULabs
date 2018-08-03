@@ -1,14 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package datos;
 
-/**
- *
- * @author Carlos
- */
+import domain.Persona;
+import java.sql.*;
+import java.util.*;
+
 public class PersonaJDBC {
+ 
+    private final String SQL_INSERT = "INSERT INTO persona (nombre, apellido) VALUES (?,?)";
+    private final String SQL_UPDATE = "UPDATE persona SET nombre=?, apellido=? WHERE id_persona=?";
+    private final String SQL_DELETE = "DELETE FROM persona WHERE id_persona=?";
+    private final String SQL_SELECT = "SELECT * FROM persona ORDER BY id_persona";
+    
     
 }
