@@ -103,14 +103,55 @@ public class PersonaJDBC {
         
     }
     
-    /*public List<Persona> select(){
+    public List<Persona> select(){
     
         Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
         
+        Persona p = null;
+        String nom;
+        String ape;
+        int id;
         
+        List<Persona> personas = new ArrayList<>();
         
-    }*/
+        try{
+        
+            conn = Conexion.getConnection();
+            st = conn.createStatement();
+            rs = st.executeQuery(SQL_SELECT);
+            
+            while(rs.next()){
+                
+                nom = rs.getString(2);
+                ape = rs.getString(3);
+                id = rs.getInt(1);
+            
+                p = new Persona();
+                p.setId_persona(id);
+                p.setNombre(nom);
+                p.setApellido(ape);
+                
+                personas.add(p);
+                
+            }
+            
+            System.out.println("La consulta ha devuelto " + personas.size() + " filas");
+            
+        }catch(SQLException e){
+        
+            e.printStackTrace();
+        
+        }finally{
+           
+            Conexion.close(rs);
+            Conexion.close(conn);
+            
+        }
+        
+        return personas;
+        
+    }
     
 }
