@@ -42,7 +42,7 @@ public class PersonaJDBC {
         
     }
     
-    public int update (int id_persona, String nombre, String apellido){
+    public int update(int id_persona, String nombre, String apellido){
     
         Connection conn = null;
         PreparedStatement pps = null;
@@ -73,5 +73,44 @@ public class PersonaJDBC {
         return rows;
         
     }
+    
+    public int delete(int id_persona){
+    
+        Connection conn = null;
+        PreparedStatement pps = null;
+        int rows = 0;
+    
+        try{
+            
+            conn = Conexion.getConnection();
+            pps = conn.prepareStatement(SQL_DELETE);
+            pps.setInt(1, id_persona);
+            rows = pps.executeUpdate();
+            System.out.println(rows + " registros eliminados");
+            
+        }catch(SQLException e){
+        
+            e.printStackTrace();
+        
+        } finally{
+        
+            Conexion.close(pps);
+            Conexion.close(conn);
+        
+        }
+        
+        return rows;
+        
+    }
+    
+    /*public List<Persona> select(){
+    
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
+        
+        
+        
+    }*/
     
 }
